@@ -1,5 +1,6 @@
 <?php
 
+
 error_reporting(0);
 
 $sexo = $_POST['sexo'];
@@ -193,20 +194,71 @@ if ($rtotal < 20){echo 'Faltan preguntas por contestar'.$rtotal;}
 
 else{
 
-// Determinando el porcentaje.
+	// Determinando el porcentaje.
 
 $psanguineo = $tsanguineo * 100 / 20;
 $pcolerico = $tcolerico * 100 / 20;
 $pmelancolico = $tmelancolico * 100 / 20;
 $pflematico = $tflematico * 100 / 20;
 
-echo 'Eres: '.$psanguineo.' % Sanguineo<br>';
-echo 'Eres: '.$pcolerico.' % Colerico<br>';
-echo 'Eres: '.$pmelancolico.' % Melancolico<br>';
-echo 'Eres: '.$pflematico.' % Flematico<br>';
+echo '
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Barras de progreso HTML5 animadas con Javascript</title>
+<link rel="stylesheet" href="style.css" />
+<script src="animateprogress.js"></script>
+</head>
+<body>
 
-	$conexion = mysql_connect("localhost", "root","");
-	mysql_select_db("temperamento",$conexion);
+<div class="center">
+	 
+		<h3 align="center">Tu resultado</h3>
+		
+	    <div class="progress">
+		<p>Sanguineo</p>
+			<progress id="Sanguineo" max="100"></progress>
+			<span></span>
+		
+		</div>
+		
+		<div class="progress">
+		<p>Colerico</p>
+			<progress id="Colerico" max="100"></progress>
+			<span></span>
+		
+		</div>
+	
+		<div class="progress">
+		<p>Melancolico</p>
+			<progress id="Melancolico" max="100"></progress>
+			<span></span>
+		
+		</div>
+		
+		<div class="progress">
+		<p>Flematico</p>
+			<progress id="Flematico" max="100"></progress>
+			<span></span>
+		
+		</div>
+</div>
+
+<script type="text/javascript"> 
+
+	window.onload = function() { 
+		
+		animateprogress("#Sanguineo",'.$psanguineo.');
+		animateprogress("#Colerico",'.$pcolerico.');
+		animateprogress("#Melancolico",'.$pmelancolico.');
+		animateprogress("#Flematico",'.$pflematico.');
+		
+	};
+
+
+</script>';
+	$conexion = mysql_connect("mysql5.000webhost.com", "a7774461_victor","Vikttor25132279");
+	mysql_select_db("a7774461_test",$conexion);
 	$sql = "INSERT INTO test(nombre,sexo,sanguineo,colerico,melancolico,flematico) VALUES ('$nombre','$sexo','$tsanguineo','$tcolerico','$tmelancolico','$tflematico')";
 	mysql_query($sql);
 }
